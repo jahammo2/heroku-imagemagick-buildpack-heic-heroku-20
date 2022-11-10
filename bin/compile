@@ -25,9 +25,9 @@ function vendor() {
     export PKG_CONFIG_PATH="$path/lib/pkgconfig:$PKG_CONFIG_PATH"
   fi
 
-  export CPPPATH="$path/include:$CPPPATH"
-  export CPATH="$path/include:$CPATH"
-  export C_INCLUDE_PATH="$path/include:$C_INCLUDE_PATH"
+  export CPPPATH="$path/include/ImageMagick-7:$CPPPATH"
+  export CPATH="$path/include/ImageMagick-7:$CPATH"
+  export C_INCLUDE_PATH="$path/include/ImageMagick-7:$C_INCLUDE_PATH"
   export LIBRARY_PATH="$path/lib:$LIBRARY_PATH"
   export LD_LIBRARY_PATH="$path/lib:$LD_LIBRARY_PATH"
 }
