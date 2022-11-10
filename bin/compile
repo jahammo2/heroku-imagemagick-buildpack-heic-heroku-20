@@ -10,6 +10,9 @@ ENV_DIR=$3
 BIN_DIR=$(cd "$(dirname "$0")"; pwd)
 ROOT_DIR=$(dirname "$BIN_DIR")
 
+VENDOR_DIR="$BUILD_DIR/vendor"
+INSTALL_DIR="$VENDOR_DIR/imagemagick"
+
 function vendor() {
   local binary="$1"
   local path="$2"
