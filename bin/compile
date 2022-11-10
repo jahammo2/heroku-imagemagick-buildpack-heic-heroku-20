@@ -53,3 +53,11 @@ export PKG_CONFIG_PATH="\$PKG_CONFIG_PATH:${PKG_CONFIG_PATH//$BUILD_DIR//app}"
 export CPPPATH="\$CPPPATH:${CPPPATH//$BUILD_DIR//app}"
 export CPATH="\$CPATH:${CPATH//$BUILD_DIR//app}"
 EOF
+
+# update PATH and LD_LIBRARY_PATH
+echo "-----> Updating environment variables"
+PROFILE_PATH="$BUILD_DIR/.profile.d/imagemagick.sh"
+ACTUAL_INSTALL_PATH="$HOME/vendor/imagemagick"
+echo "export PATH=$ACTUAL_INSTALL_PATH/bin:\$PATH" >> $PROFILE_PATH
+echo "export LD_LIBRARY_PATH=$ACTUAL_INSTALL_PATH/lib:\$LD_LIBRARY_PATH" >> $PROFILE_PATH
+echo "export MAGICK_CONFIGURE_PATH=$ACTUAL_INSTALL_PATH" >> $PROFILE_PATH
