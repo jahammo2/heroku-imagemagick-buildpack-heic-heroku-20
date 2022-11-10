@@ -59,6 +59,16 @@ export CPPPATH="\$CPPPATH:$CPPPATH"
 export CPATH="\$CPATH:$CPATH"
 export C_INCLUDE_PATH="\$C_INCLUDE_PATH:$C_INCLUDE_PATH"
 
+echo $MAGICK_HOME
+echo $MAGICK_CONFIGURE_PATH
+echo $PATH
+echo $LD_LIBRARY_PATH
+echo $LIBRARY_PATH
+echo $PKG_CONFIG_PATH
+echo $CPPPATH
+echo $CPATH
+echo $C_INCLUDE_PATH
+
 mkdir -p $BUILD_DIR/.profile.d
 cat <<EOF > $BUILD_DIR/.profile.d/imagemagick.sh
 export MAGICK_HOME="$ACTUAL_INSTALL_PATH"
