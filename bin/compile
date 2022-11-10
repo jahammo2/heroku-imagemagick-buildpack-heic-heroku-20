@@ -27,6 +27,7 @@ function vendor() {
 
   export CPPPATH="$path/include:$CPPPATH"
   export CPATH="$path/include:$CPATH"
+  export C_INCLUDE_PATH="$path/include:$C_INCLUDE_PATH"
   export LIBRARY_PATH="$path/lib:$LIBRARY_PATH"
   export LD_LIBRARY_PATH="$path/lib:$LD_LIBRARY_PATH"
 }
@@ -45,6 +46,7 @@ export LIBRARY_PATH="\$LIBRARY_PATH:$LIBRARY_PATH"
 export PKG_CONFIG_PATH="\$PKG_CONFIG_PATH:$PKG_CONFIG_PATH"
 export CPPPATH="\$CPPPATH:$CPPPATH"
 export CPATH="\$CPATH:$CPATH"
+export C_INCLUDE_PATH="\$C_INCLUDE_PATH:$C_INCLUDE_PATH"
 EOF
 
 mkdir -p $BUILD_DIR/.profile.d
@@ -57,5 +59,6 @@ export LIBRARY_PATH="\$LIBRARY_PATH:${LIBRARY_PATH//$BUILD_DIR//app}"
 export PKG_CONFIG_PATH="\$PKG_CONFIG_PATH:${PKG_CONFIG_PATH//$BUILD_DIR//app}"
 export CPPPATH="\$CPPPATH:${CPPPATH//$BUILD_DIR//app}"
 export CPATH="\$CPATH:${CPATH//$BUILD_DIR//app}"
+export C_INCLUDE_PATH="\$C_INCLUDE_PATH:${C_INCLUDE_PATH//$BUILD_DIR//app}"
 EOF
 
