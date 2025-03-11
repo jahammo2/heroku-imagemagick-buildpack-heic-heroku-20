@@ -30,6 +30,7 @@ function vendor() {
 
   if [ -d "$path/lib/pkgconfig" ]; then
     echo "-----> export PKG_CONFIG_PATH"
+    ls "$path/lib/pkgconfig"
     export PKG_CONFIG_PATH="$path/lib/pkgconfig:$PKG_CONFIG_PATH"
   fi
 
@@ -38,7 +39,7 @@ function vendor() {
 
   export CPPPATH="$path/include/ImageMagick-7:$CPPPATH"
   export CPPPATH=$(echo "$CPPPATH" | awk -v RS=':' '!seen[$0]++ && $0 {printf "%s%s", sep, $0; sep=":"}')
-  ls -l "$path/include"
+  ls "$path/include"
 
   export CPATH="$path/include/ImageMagick-7:$CPATH"
   export CPATH=$(echo "$CPATH" | awk -v RS=':' '!seen[$0]++ && $0 {printf "%s%s", sep, $0; sep=":"}')
@@ -58,6 +59,7 @@ echo "-----> CACHE_DIR: $CACHE_DIR"
 echo "-----> ENV_DIR: $ENV_DIR"
 echo "-----> ROOT_DIR: $ROOT_DIR"
 echo "-----> BIN_DIR: $BIN_DIR"
+echo "-----> PKG_CONFIG_PATH: $PKG_CONFIG_PATH"
 
 vendor "$ROOT_DIR/build/imagemagick.tar.bz2" "$BUILD_DIR/vendor/imagemagick"
 
