@@ -39,8 +39,8 @@ function vendor() {
   export PKG_CONFIG_PATH=$(echo "$PKG_CONFIG_PATH" | awk -v RS=':' '!seen[$0]++ && $0 {printf "%s%s", sep, $0; sep=":"}')
   export PATH=$(echo "$PATH" | awk -v RS=':' '!seen[$0]++ && $0 {printf "%s%s", sep, $0; sep=":"}')
 
-  export CPPPATH="$path/include/ImageMagick-7:$CPPPATH"
-  export CPPPATH=$(echo "$CPPPATH" | awk -v RS=':' '!seen[$0]++ && $0 {printf "%s%s", sep, $0; sep=":"}')
+  export CPPATH="$path/include/ImageMagick-7:$CPPATH"
+  export CPPATH=$(echo "$CPPATH" | awk -v RS=':' '!seen[$0]++ && $0 {printf "%s%s", sep, $0; sep=":"}')
   ls "$path/include"
 
   export CPATH="$path/include/ImageMagick-7:$CPATH"
@@ -56,14 +56,14 @@ function vendor() {
   export LD_LIBRARY_PATH=$(echo "$LD_LIBRARY_PATH" | awk -v RS=':' '!seen[$0]++ && $0 {printf "%s%s", sep, $0; sep=":"}')
 }
 
+vendor "$ROOT_DIR/build/imagemagick.tar.bz2" "$BUILD_DIR/vendor/imagemagick"
+
 echo "-----> BUILD_DIR: $BUILD_DIR"
 echo "-----> CACHE_DIR: $CACHE_DIR"
 echo "-----> ENV_DIR: $ENV_DIR"
 echo "-----> ROOT_DIR: $ROOT_DIR"
 echo "-----> BIN_DIR: $BIN_DIR"
 echo "-----> PKG_CONFIG_PATH: $PKG_CONFIG_PATH"
-
-vendor "$ROOT_DIR/build/imagemagick.tar.bz2" "$BUILD_DIR/vendor/imagemagick"
 
 ACTUAL_INSTALL_PATH="$HOME/vendor/imagemagick"
 echo $ACTUAL_INSTALL_PATH
