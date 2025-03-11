@@ -17,20 +17,33 @@ function vendor() {
   mkdir -p $path
   tar -xj -f $binary -C $path
 
+  echo "-----> path: $path"
+
   if [ -d "$path/bin" ]; then
     export PATH="$path/bin:$PATH"
   fi
 
   if [ -d "$path/lib/pkgconfig" ]; then
     export PKG_CONFIG_PATH="$path/lib/pkgconfig:$PKG_CONFIG_PATH"
+    # Remove duplicates
+    PKG_CONFIG_PATH=$(echo $PKG_CONFIG_PATH | awk -v RS=: -v ORS=: '!($0 in a) {a[$0]; print}')
+    PATH=$(echo $PATH | awk -v RS=: -v ORS=: '!($0 in a) {a[$0]; print}')
   fi
 
   export CPPPATH="$path/include/ImageMagick-7:$CPPPATH"
+  ls -l "$path/include"
+
   export CPATH="$path/include/ImageMagick-7:$CPATH"
   export C_INCLUDE_PATH="$path/include/ImageMagick-7:$C_INCLUDE_PATH"
   export LIBRARY_PATH="$path/lib:$LIBRARY_PATH"
   export LD_LIBRARY_PATH="$path/lib:$LD_LIBRARY_PATH"
 }
+
+echo "-----> BUILD_DIR: $BUILD_DIR"
+echo "-----> CACHE_DIR: $CACHE_DIR"
+echo "-----> ENV_DIR: $ENV_DIR"
+echo "-----> ROOT_DIR: $ROOT_DIR"
+echo "-----> BIN_DIR: $BIN_DIR"
 
 vendor "$ROOT_DIR/build/imagemagick.tar.bz2" "$BUILD_DIR/vendor/imagemagick"
 
