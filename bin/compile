@@ -22,7 +22,6 @@ function vendor() {
   echo "-----> ls $path/lib/pkgconfig and bin and imagemagick"
   ls "$path/bin"
   ls "$path/lib/pkgconfig"
-  ls "~/vendor/imagemagick/lib/pkgconfig"
 
   if [ -d "$path/bin" ]; then
     echo "-----> export PATH"
