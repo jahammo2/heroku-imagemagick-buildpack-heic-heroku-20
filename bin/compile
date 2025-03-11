@@ -19,24 +19,37 @@ function vendor() {
 
   echo "-----> path: $path"
 
+  echo "-----> ls $path/lib/pkgconfig and bin and imagemagick"
+  ls "$path/bi"
+  ls "$path/lib/pkgconfig"
+  ls "/app/vendor/imagemagick/lib/pkgconfig"
+
   if [ -d "$path/bin" ]; then
     export PATH="$path/bin:$PATH"
   fi
 
   if [ -d "$path/lib/pkgconfig" ]; then
     export PKG_CONFIG_PATH="$path/lib/pkgconfig:$PKG_CONFIG_PATH"
-    # Remove duplicates
-    PKG_CONFIG_PATH=$(echo $PKG_CONFIG_PATH | awk -v RS=: -v ORS=: '!($0 in a) {a[$0]; print}')
-    PATH=$(echo $PATH | awk -v RS=: -v ORS=: '!($0 in a) {a[$0]; print}')
   fi
 
+  export PKG_CONFIG_PATH=$(echo "$PKG_CONFIG_PATH" | awk -v RS=':' '!seen[$0]++ && $0 {printf "%s%s", sep, $0; sep=":"}')
+  export PATH=$(echo "$PATH" | awk -v RS=':' '!seen[$0]++ && $0 {printf "%s%s", sep, $0; sep=":"}')
+
   export CPPPATH="$path/include/ImageMagick-7:$CPPPATH"
+  export CPPPATH=$(echo "$CPPPATH" | awk -v RS=':' '!seen[$0]++ && $0 {printf "%s%s", sep, $0; sep=":"}')
   ls -l "$path/include"
 
   export CPATH="$path/include/ImageMagick-7:$CPATH"
+  export CPATH=$(echo "$CPATH" | awk -v RS=':' '!seen[$0]++ && $0 {printf "%s%s", sep, $0; sep=":"}')
+
   export C_INCLUDE_PATH="$path/include/ImageMagick-7:$C_INCLUDE_PATH"
+  export C_INCLUDE_PATH=$(echo "$C_INCLUDE_PATH" | awk -v RS=':' '!seen[$0]++ && $0 {printf "%s%s", sep, $0; sep=":"}')
+
   export LIBRARY_PATH="$path/lib:$LIBRARY_PATH"
+  export LIBRARY_PATH=$(echo "$LIBRARY_PATH" | awk -v RS=':' '!seen[$0]++ && $0 {printf "%s%s", sep, $0; sep=":"}')
+
   export LD_LIBRARY_PATH="$path/lib:$LD_LIBRARY_PATH"
+  export LD_LIBRARY_PATH=$(echo "$LD_LIBRARY_PATH" | awk -v RS=':' '!seen[$0]++ && $0 {printf "%s%s", sep, $0; sep=":"}')
 }
 
 echo "-----> BUILD_DIR: $BUILD_DIR"
